@@ -12,7 +12,7 @@ public class PriceTest {
 
     @DisplayName("구입금액이 천원 단위가 아니면 예외 발생한다.")
     @ParameterizedTest
-    @ValueSource(ints = {1500, 2001, 2010})
+    @ValueSource(ints = {100, 500, 1500, 2001, 2010})
     void createPriceByPurchaseUnit1(int price) {
         assertThatThrownBy(() -> Price.from(price))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -27,4 +27,19 @@ public class PriceTest {
                 .doesNotThrowAnyException();
     }
 
+    @DisplayName("구입금액이 천원 단위어도 천원이 넘지 않으면 예외 발생한다")
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1000})
+    void createPriceByMinPrice1(int price) {
+        assertThatThrownBy(() -> Price.from(price))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("구입금액이 천원 단위이고, 천원을 넘으면 통과한다")
+    @ParameterizedTest
+    @ValueSource(ints = {1000, 1000})
+    void createPriceByMinPrice2(int price) {
+        assertThatCode(() -> Price.from(price))
+                .doesNotThrowAnyException();
+    }
 }
