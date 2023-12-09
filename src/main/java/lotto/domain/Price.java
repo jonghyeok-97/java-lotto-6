@@ -19,5 +19,8 @@ public class Price {
         if (price < 1000) {
             throw new IllegalArgumentException("[ERROR] 최소 1000원은 입력하세요.");
         }
+        if (price > 2000000000) {
+            throw new IllegalArgumentException("[ERROR] 최대 구입 금액은 20억입니다.");
+        }
     }
 }

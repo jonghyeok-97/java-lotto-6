@@ -15,7 +15,7 @@ public final class InputView {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException error) {
-            throw new IllegalArgumentException("[ERROR] 숫자만 입력 가능합니다.");
+            throw new IllegalArgumentException("[ERROR] 1000~2000000000 사이로 입력하세요.");
         }
     }
 }
