@@ -12,6 +12,10 @@ public class Price {
         return new Price(price);
     }
 
+    public int divideByPricePerOneLotto() {
+        return price / 1000;
+    }
+
     private void validate(int price) {
         if (price % 1000 != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 가격은 1000원 단위어야 합니다.");

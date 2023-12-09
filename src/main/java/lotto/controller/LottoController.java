@@ -1,5 +1,8 @@
 package lotto.controller;
 
+import lotto.domain.LottoFactory;
+import lotto.domain.LottoGroup;
+import lotto.domain.Price;
 import lotto.view.InputView;
 
 public class LottoController {
@@ -10,6 +13,8 @@ public class LottoController {
     }
 
     public void run() {
+        Price price = Price.from(inputView.readPrice());
+        LottoGroup lottoGroup = LottoGroup.from(LottoFactory.createLottoGroup(price));
 
     }
 }
