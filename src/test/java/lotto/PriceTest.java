@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import lotto.domain.Price;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -49,5 +50,13 @@ public class PriceTest {
     void createPriceByMaxPrice1(int price) {
         assertThatThrownBy(() -> Price.from(price))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 값이_같으면_동일하다() {
+        Price price1 = Price.from(10000);
+        Price price2 = Price.from(10000);
+
+        assertThat(price1==price2).isTrue();
     }
 }

@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import camp.nextstep.edu.missionutils.Randoms;
-import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGroup {
     private final List<Lotto> lottos;
@@ -15,5 +13,23 @@ public class LottoGroup {
 
     public static LottoGroup from(List<Lotto> lottos) {
         return new LottoGroup(lottos);
+    }
+
+    public Result calculate(WinningLotto winningLotto) {
+        EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
+        for (Rank rank : Rank.values()) {
+            ranks.put(rank, 0);
+        }
+        for (Lotto lotto : this.lottos) {
+            Rank rank = winningLotto.countWinningNumber(lotto);
+            ranks.put(rank, ranks.get(rank) + 1);
+        }
+        return Result.from(ranks);
+    }
+
+    public List<List<Integer>> getLottos() {
+        return this.lottos.stream()
+                .map(Lotto::getLottoNumber)
+                .collect(Collectors.toList());
     }
 }
